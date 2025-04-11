@@ -9,7 +9,6 @@ let seconds = document.querySelector('span[data-seconds]');
 let minutes = document.querySelector('span[data-minutes]');
 let hours = document.querySelector('span[data-hours]');
 let days = document.querySelector('span[data-days]');
-let result = { days, hours, minutes, seconds };
 let userSelectedDate = null;
 let intervalId = null;
 const options = {
@@ -61,7 +60,7 @@ function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 function countDown() {
-  result = convertMs(userSelectedDate - Date.now());
+  const result = convertMs(userSelectedDate - Date.now());
   seconds.textContent = addLeadingZero(result.seconds);
   minutes.textContent = addLeadingZero(result.minutes);
   hours.textContent = addLeadingZero(result.hours);

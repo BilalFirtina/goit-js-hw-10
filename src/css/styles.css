@@ -57,3 +57,16 @@ body {
 .button-container input:hover {
   border: 2px solid rgba(197, 107, 5, 0.515);
 }
+form {
+  width: 15%;
+  margin: 0 auto;
+}
+form > *:first-child {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+form fieldset {
+  width: 100%;
+}
