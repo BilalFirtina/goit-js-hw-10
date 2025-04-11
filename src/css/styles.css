@@ -47,3 +47,13 @@ body {
   display: flex;
   column-gap: 10px;
 }
+.button-container input {
+  border: 2px solid black;
+  height: 25px;
+}
+.button-container button:hover {
+  background-color: rgba(241, 6, 6, 0.564);
+}
+.button-container input:hover {
+  border: 2px solid rgba(197, 107, 5, 0.515);
+}

@@ -34,6 +34,9 @@ const options = {
 button.onclick = () => {
   countDown();
   intervalId = setInterval(countDown, 1000);
+  button.disabled = true;
+  time.disabled = true;
+  time.style.cursor = 'auto';
 };
 
 function convertMs(ms) {
@@ -66,6 +69,8 @@ function countDown() {
   if (result.seconds <= 0) {
     clearInterval(intervalId);
     seconds.textContent = '00';
+    time.disabled = false;
+    time.style.cursor = 'pointer';
     return;
   }
 }
