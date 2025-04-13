@@ -74,13 +74,13 @@ function countDown() {
       days.textContent === '00'
     ) {
       clearInterval(id);
-      seconds.textContent = '00';
-      minutes.textContent = '00';
-      hours.textContent = '00';
-      days.textContent = '00';
+      ['seconds', 'minutes', 'hours', 'days'].forEach(unit => {
+        document.querySelector(`span[data-${unit}]`).textContent = '00';
+      });
       timePicker.disabled = false;
       timePicker.style.cursor = 'pointer';
       button.style.cursor = 'auto';
+      return;
     }
   }
 }
