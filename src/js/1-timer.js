@@ -23,7 +23,10 @@ flatpickr(timePicker, {
       button.disabled = false;
     } else {
       button.disabled = true;
-      window.alert('Please choose a date in the future');
+      iziToast.error({
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+      });
     }
   },
 });
@@ -54,33 +57,35 @@ function addLeadingZero(value) {
 }
 
 function countDown() {
-  let dif = convertMs(userSelectedDate - Date.now());
-  seconds.textContent = addLeadingZero(dif.seconds);
-  minutes.textContent = addLeadingZero(dif.minutes);
-  hours.textContent = addLeadingZero(dif.hours);
-  days.textContent = addLeadingZero(dif.days);
-  button.disabled = true;
-  button.style.cursor = 'not-allowed';
-  timePicker.disabled = true;
-  timePicker.style.cursor = 'not-allowed';
-  if (
-    seconds.textContent === '00' &&
-    minutes.textContent === '00' &&
-    hours.textContent === '00' &&
-    days.textContent === '00'
-  ) {
-    clearInterval(id);
-    seconds.textContent = '00';
-    minutes.textContent = '00';
-    hours.textContent = '00';
-    days.textContent = '00';
-    button.disabled = false;
-    timePicker.disabled = false;
-    timePicker.style.cursor = 'pointer';
-    button.style.cursor = 'auto';
+  if (userSelectedDate - Date.now() > 0) {
+    let dif = convertMs(userSelectedDate - Date.now());
+    seconds.textContent = addLeadingZero(dif.seconds);
+    minutes.textContent = addLeadingZero(dif.minutes);
+    hours.textContent = addLeadingZero(dif.hours);
+    days.textContent = addLeadingZero(dif.days);
+    button.disabled = true;
+    button.style.cursor = 'not-allowed';
+    timePicker.disabled = true;
+    timePicker.style.cursor = 'not-allowed';
+    if (
+      seconds.textContent === '00' &&
+      minutes.textContent === '00' &&
+      hours.textContent === '00' &&
+      days.textContent === '00'
+    ) {
+      clearInterval(id);
+      seconds.textContent = '00';
+      minutes.textContent = '00';
+      hours.textContent = '00';
+      days.textContent = '00';
+      timePicker.disabled = false;
+      timePicker.style.cursor = 'pointer';
+      button.style.cursor = 'auto';
+    }
   }
 }
 button.onclick = () => {
+  clearInterval(id);
   id = setInterval(() => {
     countDown();
   }, 1000);
